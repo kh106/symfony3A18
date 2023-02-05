@@ -1,3 +1,11 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
+student:
+  path: /student
+  controller: App\Controller\StudentController::index
+
+teacher:
+  path: /teacher/{name}
+  controller: App\Controller\TeacherController::showTeacher
+
+goToIndex:
+  path: /goToIndex
+  controller: App\Controller\TeacherController::goToIndex
