@@ -1,0 +1,91 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello Esprit!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h1>Liste des formations ✅</h1>
+    
+   <ul>
+        <li><h2 style="color:blue">Titres en majuscule</h2>
+        {%for elt in listeF%}
+{{elt.Titre | upper}}
+<br>
+
+        {%endfor%}
+        </li>
+
+        <li><h3 style="color:red">Nombre de formations</h3>
+<p>Le nombre de formations est de : {{listeF | length}}</p>
+        </li>
+
+        <li><h4 style="color:green">Formations théoriques</h4>
+        {%for elt in listeF%}
+{%if elt.Description is same as "formation theorique" %}
+{{elt.Titre|upper}}<br>
+{%endif%}
+{%endfor%}
+        </li>
+
+        <li><h5 style="color:brown">Formation ayant le plus de participants</h5>
+         {% set maxValue = 0 %}
+
+ {% for elt in listeF %}
+     {% set maxValue = max(elt.nb_participants, maxValue) %}
+ {% endfor %}
+
+ {% for elt in listeF%}
+ {% if elt.nb_participants == maxValue %}
+ <p>La formation avec le plus grand nombre de participants est : {{elt.Titre}}</p>
+ {%endif%}
+ {%endfor%}
+        </li>
+
+        <li><h6 style="color:tan">Nombre total de participants toutes formations confondues</h6>
+        {% set nb = 0 %}
+
+        {% for elt in listeF %}
+     {% set nb = nb + elt.nb_participants %}
+ {% endfor %}
+ <p>Le nombre total de participants est de : {{nb}}</p>
+        </li>
+
+        <li><h7 style="color:grey">Tableau vide ou non défini</h7>
+
+         {%if listeF is defined%}
+ <p>le tableau est défini</p>
+ {% else %}
+ <p>le tableau n'est pas défini</p>
+ {% endif %}
+
+ {% if listeF is empty %}
+ <p>le tableau est vide</p>
+ {% else %}
+ <p>le tableau non vide et contenant {{listeF|length}} élements</p>
+ {%endif%}
+        </li>
+
+        <li><h8 style="color:orange">Formations sans participants</h8><br>
+
+        {%for elt in listeF%}
+{%if elt.nb_participants==0 %}
+
+{{elt.ref~', '}}
+{{elt.Titre | upper}}
+{{~' ,'~elt.Description~', '}}
+{{elt.date_debut~', '}}
+{{elt.date_fin~', '}}
+{{elt.nb_participants}}
+<a href="{{url('getname',{'nom':elt.Titre})}}"><input type="submit" style="background-color:orange" value="Participer" name="Participe"></a><br>
+{%endif%}
+{%endfor%}
+
+        </li>
+    </ul>
+</div>
+{% endblock %}
