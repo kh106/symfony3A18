@@ -1,0 +1,22 @@
+<table border="1">
+{%for c in classroom%}
+ <tr>
+  <td>{{c.id}}</td>
+  <td>{{c.name}}</td>
+  <td><a href={{'path(`delete_classroom`,{'id':c.id)}}">Delete</a>
+  <td><a href={{'path(`add_classroom`,{'id':s.id)}}">Ajouter</a>
+  <td><a href={{'path(`update_classroom`,{'id':s.id)}}">Modifier</a>
+ </tr>
+{%endfor%}
+</table>
+<h1>Ajouter une classe</h1>
+<label for="name">Name : </label>
+<input type="name" id="name" name="Name">
+<input type="submit" value="Ajouter">
+<h1>Modifier une classe</h1>
+<label for="name">Name : </label>
+<input type="name" id="name" name="Name">
+<input type="submit" value="Modifier">
+<label for="name">Name : </label>
+<input type="name" id="name" name="Name">
+<input type="submit" value="supprimer">
